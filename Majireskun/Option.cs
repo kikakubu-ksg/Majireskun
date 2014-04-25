@@ -13,6 +13,7 @@ namespace Majireskun
     {
         // access member
         private Form_Main _parentForm;      //親フォーム
+        public string strConfig;
 
         public Option()
         {

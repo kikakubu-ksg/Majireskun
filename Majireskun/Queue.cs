@@ -43,5 +43,11 @@ namespace Majireskun
                 _parentForm = value;
             }
         }
+
+        // methods
+        public void addQueueContainerBindingSource(QueueContainer cont)
+        {
+            queueContainerBindingSource.Add(cont);
+        }
     }
 }
