@@ -66,6 +66,7 @@
             this.textBox_res.Name = "textBox_res";
             this.textBox_res.Size = new System.Drawing.Size(475, 181);
             this.textBox_res.TabIndex = 1;
+            this.textBox_res.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_res_KeyDown);
             // 
             // checkBox_option
             // 
@@ -198,9 +199,12 @@
             this.Controls.Add(this.checkBox_option);
             this.Controls.Add(this.textBox_res);
             this.Controls.Add(this.button_send);
+            this.KeyPreview = true;
             this.Name = "Form_Main";
             this.Text = "Form_main";
             this.Load += new System.EventHandler(this.Form_Main_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form_Main_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form_Main_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,0 +1,279 @@
+﻿html{
+height: 100%;
+}
+
+
+body {
+	font-size:10pt;
+	font-family: "メイリオ", Meiryo, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "ＭＳ Ｐゴシック", "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif;
+	background-color:#ffeeee;
+	margin:5;
+}
+
+#headerArea {  
+    position: fixed !important;  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 22px;  
+    background-color: #B3B8AE;  
+    color: #555555; 
+    font-size:small;
+}
+#headerArea a{color: #555555;text-decoration: underline;}
+#headerArea a:hover{color: #f4f40a;text-decoration: underline;}
+
+
+img {
+	border:0;
+}
+a.lef {
+	color:#6495ed;
+}
+a.lef:hover {
+	color:#ff8c00;
+}
+a.lefn {
+	color:#483d88;
+}
+a.lefn:hover {
+	color:#ff8c00;
+}
+a {
+	color:#DD8D01;                       /*�����N�F  ��:#0080ff*/
+	text-decoration:underline;
+}
+a:hover {
+	color:#E4BC01;                       /*�����N�F  ��:#6495ed*/
+}
+
+/*BASE*/
+.base {
+	position:relative;top:0;left:0;width:760px;
+}
+.base2 {
+	position:relative;top:0;left:0;width:760px;
+}
+.updatel{font-size:9px;
+		 color:#999999;line-height:150%;
+		 }
+
+button.log{border:outset 1px #ffcc66; background-color:#999999; color:#ffffff; text-decoration:none; padding:0em 0em 0em 0em; font-size:12px;width:100px;margin-right:1px;}
+button:active{border-style:inset;} 
+
+
+
+/*MAIN*/
+
+.f12{font-size:12px;margin-right:1px;}
+.s{font-size:9px;text-indent:10px;color:#999999;}
+.sr{font-size:9px;text-align:right;text-indent:10px;color:#996666;}
+
+h1 {font-size:20px;color:black;text-indent:3px;margin:0;}
+h2 {font-size:15px;color:#0080ff;text-indent:2px;margin:0;}
+
+.ver {font-size:15px;color:#DD8D01;text-indent:2px;margin:0;}    /*�o�[�W���� ��:#0080ff */
+
+.author{font-size:8px;text-align:right;color:#aaaaaa;}
+
+/*�ǉ�*/
+.white{color:white;}
+.whatsnew{font-size:8pt;}
+a.red{font-size:7pt;color:red;font-weight:bold;}
+a.red:hover{color: #F18D99;}
+table {font-size:10pt;}
+
+.main-bg{background-color:black;}            /*�������݉�ʂ̔w�i�F       ��:#001451*/
+
+table.owner {
+	background-color:#FDFBC3;            /*�w�i�F�@�i�O���̃e�[�u���j ��:#ECF5FF*/
+	width:90%;
+	border-style:none;
+}
+table.sub {
+	border: 2px #E4BC01 solid;           /*���E���F�i�����̃e�[�u���j       ��:#0080ff*/
+	background-color:white;
+	border-collapse:collapse;
+}
+td.subtitle{
+	border-bottom: 2px #E4BC01 solid;    /*���E���F�i�����̃e�[�u���̃Z���j ��:#0080ff*/
+	color:#FDE701;                       /*�����F  �i�����̃e�[�u���̃Z���j ��:#359AFF*/
+	background-color:black;
+	text-align:center;
+	font-weight:bold;
+}
+hr{
+	color: #E4BC01;                      /*�������F ��:#0080ff*/
+	background-color:#E4BC01;            /*�������F ��:#0080ff*/
+	border-style:none;
+	height: 2px;
+}
+hr.solid{
+	height: 1px;
+}
+
+/*�{�^��_�I�����W*/
+a.ovalbutton_orange{
+background: transparent url('/common/img/oval-orange-left.gif') no-repeat top left;
+display: block;
+float: left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+padding-left: 11px; /* Width of left menu image */
+text-decoration: none;
+}
+
+a:link.ovalbutton_orange, a:visited.ovalbutton_orange, a:active.ovalbutton_orange{
+color: #494949; /*button text color*/
+
+}
+
+a.ovalbutton_orange span{
+background: transparent url('/common/img/oval-orange-right.gif') no-repeat top right;
+display: block;
+padding: 4px 11px 4px 0; /*Set 11px below to match value of 'padding-left' value above*/
+}
+
+a.ovalbutton_orange:hover{ /* Hover state CSS */
+background-position: bottom left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+text-decoration: none;
+
+}
+
+a.ovalbutton_orange:hover span{ /* Hover state CSS */
+background-position: bottom right;
+color: black;
+}
+
+/*�{�^��_�u���[*/
+a.ovalbutton_blue{
+background: transparent url('/common/img/oval-blue-left.gif') no-repeat top left;
+display: block;
+float: left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+padding-left: 11px; /* Width of left menu image */
+text-decoration: none;
+}
+
+a:link.ovalbutton_blue, a:visited.ovalbutton_blue, a:active.ovalbutton_blue{
+color: #494949; /*button text color*/
+
+}
+
+a.ovalbutton_blue span{
+background: transparent url('/common/img/oval-blue-right.gif') no-repeat top right;
+display: block;
+padding: 4px 11px 4px 0; /*Set 11px below to match value of 'padding-left' value above*/
+}
+
+a.ovalbutton_blue:hover{ /* Hover state CSS */
+background-position: bottom left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+text-decoration: none;
+
+}
+
+a.ovalbutton_blue:hover span{ /* Hover state CSS */
+background-position: bottom right;
+color: black;
+}
+
+
+/*�{�^��_���b�h*/
+a.ovalbutton_red{
+background: transparent url('/common/img/oval-red-left.gif') no-repeat top left;
+display: block;
+float: left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+padding-left: 11px; /* Width of left menu image */
+text-decoration: none;
+}
+
+a:link.ovalbutton_red, a:visited.ovalbutton_red, a:active.ovalbutton_red{
+color: #494949; /*button text color*/
+
+}
+
+a.ovalbutton_red span{
+background: transparent url('/common/img/oval-red-right.gif') no-repeat top right;
+display: block;
+padding: 4px 11px 4px 0; /*Set 11px below to match value of 'padding-left' value above*/
+}
+
+a.ovalbutton_red:hover{ /* Hover state CSS */
+background-position: bottom left;
+font-family: Tahoma, Helvetica, sans-serif;
+font-size: 10px; /* Change 13px as desired */
+font-weight: bold; /* Change 13px as desired */
+line-height: 16px; /* This value + 4px + 4px (top and bottom padding of SPAN) must equal height of button background (default is 24px) */
+height: 24px; /* Height of button background height */
+text-decoration: none;
+
+}
+
+a.ovalbutton_red:hover span{ /* Hover state CSS */
+background-position: bottom right;
+color: black;
+}
+
+
+
+
+
+
+
+
+
+.buttonwrapper{ /* Container you can use to surround a CSS button to clear float */
+overflow: hidden; /*See: http://www.quirksmode.org/css/clearing.html */
+width: 100%;
+}
+
+
+/* edit */
+
+table.edittable{
+        border: 2px #75dbce solid;
+        border-collapse:collapse;
+        font-size:small;
+}
+table.edittable th,table.edittable td{
+        border: 2px #FFEEEE solid;
+        background-color:#B3B8AE;
+}
+table.edittable th{
+        background-color:#a84f42;
+        color:#ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+

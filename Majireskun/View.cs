@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Majireskun
 {
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class View : Form
     {
         // access member
@@ -17,7 +18,17 @@ namespace Majireskun
         public View()
         {
             InitializeComponent();
+            
         }
+        private void View_Load(object sender, EventArgs e)
+        {
+            webBrowser1.AllowWebBrowserDrop = false;
+            webBrowser1.IsWebBrowserContextMenuEnabled = false;
+            webBrowser1.WebBrowserShortcutsEnabled = false;
+            webBrowser1.ObjectForScripting = this;
+            this.webBrowser1.Navigate(System.Windows.Forms.Application.StartupPath + "\\index.html");
+        }
+
 
         private void View_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -41,6 +52,11 @@ namespace Majireskun
             {
                 _parentForm = value;
             }
+        }
+
+        public void Test(String message)
+        {
+            MessageBox.Show(message, "client code");
         }
 
     }

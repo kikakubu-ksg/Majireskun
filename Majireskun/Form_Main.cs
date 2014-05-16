@@ -89,6 +89,8 @@ namespace Majireskun
             //this.OptionInstanse.viewDate = Properties.Settings.Default.view_date;
             //this.OptionInstanse.viewNum = Properties.Settings.Default.view_num;
 
+            
+
             // 開始フラグ
             boolStartFlag = false;
 
@@ -192,7 +194,7 @@ namespace Majireskun
                 Console.WriteLine(strUrl);
                 //Regexオブジェクトを作成
                 Regex r1 = new Regex(@"2ch\.net");
-                Regex r2 = new Regex(@"jbbs\.livedoor\.jp");
+                Regex r2 = new Regex(@"jbbs\.shitaraba\.net");
                 Regex r3 = new Regex(@"http:\/\/([^:\/]*).*read\.cgi\/([^\/]*)\/([0-9]*)\/?");
                 Regex r4 = new Regex(@"http:\/\/([^:\/]*).*read\.cgi\/([^\/]*)\/([0-9]*)\/([0-9]*)\/?");
                 Regex r5 = new Regex(@"(\d{4})\/(\d{2})\/(\d{2})\(.*\) (\d{2}):(\d{2}):(\d{2})\.\d{2} ID:(.*)");
@@ -239,7 +241,7 @@ namespace Majireskun
                     string bbs = m.Groups[2].Value;
                     string key1 = m.Groups[3].Value;
                     string key2 = m.Groups[4].Value;
-                    strGet = @"http://jbbs.livedoor.jp/bbs/rawmode.cgi/" + bbs + "/" + key1 + "/" + key2 + "/";
+                    strGet = @"http://jbbs.shitaraba.net/bbs/rawmode.cgi/" + bbs + "/" + key1 + "/" + key2 + "/";
                     Console.WriteLine(strGet);
 
                     enc = Encoding.GetEncoding("euc-jp");
@@ -522,8 +524,11 @@ namespace Majireskun
 
         private void button_send_Click(object sender, EventArgs e)
         {
+            if (textBox_res.Text == "") { return; }
             //キューに追加
             QueueInstanse.addQueueContainerBindingSource(new QueueContainer(textBox_name.Text,textBox_mail.Text,textBox_res.Text));
+            //bodyをクリア
+            textBox_res.Text = "";
         }
 
 
@@ -598,6 +603,43 @@ namespace Majireskun
         {
             this.boolThreadDup = false;
             this.boolThreadDup_h = false;
+        }
+
+        private void Form_Main_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                if (textBox_res.Text == "") { return; }
+                //キューに追加
+                QueueInstanse.addQueueContainerBindingSource(new QueueContainer(textBox_name.Text, textBox_mail.Text, textBox_res.Text));
+                //bodyをクリア
+                textBox_res.ResetText();
+            }
+        }
+
+        private void textBox_res_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine(e.KeyCode);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                int SelectionStart = textBox_res.SelectionStart;
+                this.textBox_res.Text = textBox_res.Text.Substring(0, textBox_res.SelectionStart)
+ + Environment.NewLine 
+ + textBox_res.Text.Substring(textBox_res.SelectionStart + textBox_res.SelectionLength);
+                textBox_res.Select(SelectionStart + Environment.NewLine.Length, 0);
+                //e.Handled = true;
+            }
+        }
+
+        private void Form_Main_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                e.Handled = true;
         }
 
     }

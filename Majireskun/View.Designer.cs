@@ -49,6 +49,7 @@
             this.Name = "View";
             this.Text = "View";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.View_FormClosing);
+            this.Load += new System.EventHandler(this.View_Load);
             this.ResumeLayout(false);
 
         }
