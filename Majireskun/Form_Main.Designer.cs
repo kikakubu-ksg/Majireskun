@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.checkBox_Autoreload = new System.Windows.Forms.CheckBox();
             this.checkBox_assyncwrite = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_send
@@ -125,6 +126,10 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "timer-message";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // textBox_name
             // 
             this.textBox_name.Location = new System.Drawing.Point(49, 34);
@@ -181,11 +186,22 @@
             this.checkBox_assyncwrite.Text = "AssyncWrite";
             this.checkBox_assyncwrite.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(321, 246);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 269);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_assyncwrite);
             this.Controls.Add(this.checkBox_Autoreload);
             this.Controls.Add(this.label3);
@@ -226,6 +242,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox_Autoreload;
         private System.Windows.Forms.CheckBox checkBox_assyncwrite;
+        private System.Windows.Forms.Button button1;
 
 
     }

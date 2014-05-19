@@ -10,6 +10,9 @@ using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace Majireskun
 {
@@ -35,9 +38,6 @@ namespace Majireskun
         public Boolean boolThreadDup = false;    //スレッド重複防止
         public Boolean boolThreadDup_h = false;  //スレッド重複防止（避難所）
 
-        private string strThread;
-        private string strThread_haven;
-
         public Form_Main()
         {
             InitializeComponent();
@@ -57,11 +57,13 @@ namespace Majireskun
             QueueInstanse.parentForm = this;
             OptionInstanse.parentForm = this;
             ViewInstanse.parentForm = this;
+            ViewInstanse.Show();
+            ViewInstanse.Hide();
 
             // バージョン情報
-            //System.Diagnostics.FileVersionInfo ver =
-            //     System.Diagnostics.FileVersionInfo.GetVersionInfo(
-            //     System.Reflection.Assembly.GetExecutingAssembly().Location);
+            System.Diagnostics.FileVersionInfo ver =
+                 System.Diagnostics.FileVersionInfo.GetVersionInfo(
+                 System.Reflection.Assembly.GetExecutingAssembly().Location);
             //this.VersionInstanse.strVersion = ver.ProductVersion;
 
             // コンフィグファイルパス
@@ -96,9 +98,11 @@ namespace Majireskun
 
             // 開始メッセージ
             this.label_message.Enabled = false;
-            this.label_message.Text = DateTime.Now.ToString() + " " + "アプリケーション開始";
+            this.label_message.Text = DateTime.Now.ToString() + " " + "アプリケーション開始(version " + ver.ProductVersion + ")";
 
             timer1.Interval = 1000;
+            this.timer1.Start();
+            boolStartFlag = true;
 
         }
 
@@ -111,7 +115,7 @@ namespace Majireskun
         {
 
             // 本スレ
-            if (this.httptimersec % 15 == 0 && !boolThreadDup)
+            if (this.httptimersec % 15 == 0 && !boolThreadDup && this.ViewInstanse.isAutoReload())
             {
                 // データ取得処理
                 boolThreadDup = true;
@@ -119,7 +123,7 @@ namespace Majireskun
                 object[] obj = new object[5]; // 引数
 
                 obj[0] = Const.BOARD_MAIN;
-                obj[1] = this.strThread; //スレURL
+                obj[1] = this.ViewInstanse.getMainURL(); //スレURL
 
                 th =
                     new System.Threading.Thread(
@@ -129,7 +133,7 @@ namespace Majireskun
 
             }
             // 避難所
-            if (this.httptimersec % 15 == 0 && !boolThreadDup_h)
+            if (this.httptimersec % 15 == 0 && !boolThreadDup_h && this.ViewInstanse.isAutoReload())
             {
                 // データ取得処理
                 boolThreadDup_h = true;
@@ -137,7 +141,7 @@ namespace Majireskun
                 object[] obj = new object[5]; // 引数
 
                 obj[0] = Const.BOARD_HAVEN;
-                obj[1] = this.strThread_haven; //スレURL
+                obj[1] = this.ViewInstanse.getHavenURL(); //スレURL
 
                 th_h =
                     new System.Threading.Thread(
@@ -185,6 +189,9 @@ namespace Majireskun
             strNameSpace = Const.NZ(strNameSpace);
             strMailSpace = Const.NZ(strMailSpace);
 
+            //JSON構造体
+            var serializer = new DataContractJsonSerializer(typeof(DatInfo));
+
             try
             {
                 // logger
@@ -212,6 +219,7 @@ namespace Majireskun
                     if (!m.Success)
                     {
                         this.BeginInvoke(logdlg, new object[] { "スレッドURLが不正です。" });
+                        this.BeginInvoke(new Action(delegate() { this.resetthreaddup(); }), new object[] { });
                         return;
                     }
                     host = m.Groups[1].Value;
@@ -234,7 +242,8 @@ namespace Majireskun
                     Match m = r4.Match(strUrl);
                     if (!m.Success)
                     {
-                        this.BeginInvoke(logdlg, new object[] { "スレッドURLが不正です。" });
+                        this.BeginInvoke(logdlg, new object[] { "スレッドURLが不正です。(避難所)" });
+                        this.BeginInvoke(new Action(delegate() { this.resetthreaddup(); }), new object[] { });
                         return;
                     }
                     host = m.Groups[1].Value;
@@ -250,6 +259,7 @@ namespace Majireskun
                 else
                 {
                     this.BeginInvoke(logdlg, new object[] { "スレッドURLが不正です。" });
+                    this.BeginInvoke(new Action(delegate() { this.resetthreaddup(); }), new object[] { });
                     return;
                 }
 
@@ -330,11 +340,13 @@ namespace Majireskun
                             string name =  stArrayData[indexName] + " " ;
                             string mail =  "[" + stArrayData[indexMail] + "] ";
                             string date = "";
+                            DateTime datetime = new DateTime();
                             string id = "";
                             string[] arrDate = stArrayData[indexDate].Split(' ');
                             try
                             {
                                 date = arrDate[0] + " " + arrDate[1] + " ";
+                                datetime = DateTime.Parse(arrDate[0].Substring(0, 10) + " " + arrDate[1]);
                             }
                             catch (Exception) { }
                             try
@@ -345,6 +357,30 @@ namespace Majireskun
                             string num = rescnt.ToString() + " " ;
                             body = WebUtility.HtmlDecode(body);
                             target = strHi + num + name + mail + date + id + "\r\n" + body;
+                            //JSONデータを書き込むためのMemoryStreamを作成
+                            var jsonDat = new DatInfo()
+                            {
+                                ThreadDiv = Const.BBS_2CH,
+                                Self = 0,
+                                Number = rescnt,
+                                Name = name,
+                                Mail = mail,
+                                Date = date,
+                                DateTime = datetime,
+                                ID = id,
+                                Body = body
+                            };
+
+                            var stream = new MemoryStream();
+                            serializer.WriteObject(stream, jsonDat);
+                            stream.Position = 0;
+                            var reader = new StreamReader(stream);
+                            
+                            target = reader.ReadToEnd();
+
+                            stream.Dispose();
+                            reader.Dispose();
+
                             news++;
                         }
                     }
@@ -378,6 +414,7 @@ namespace Majireskun
                             string num =  rescnt.ToString() + " " ;
                             body = WebUtility.HtmlDecode(body);
                             target = strHi + num + name + mail + date + id + "\r\n" + body;
+
                             news++;
                         }
 
@@ -448,11 +485,11 @@ namespace Majireskun
             {
                 Console.WriteLine(ex.StackTrace);
                 this.BeginInvoke(new Action<String>(delegate(String str) { this.logoutput("エラー:" + ex.Message); }), new object[] { "" });
+                //this.BeginInvoke(new Action(delegate(){ this.resetthreaddup();}), new object[] { });
             }
             finally
-            {
-
-            }
+            {}
+                
         }
 
 
@@ -556,6 +593,9 @@ namespace Majireskun
             //MD5を生成
             //書き込みリストとぶつけて自分書き込みを検証
             //データをJSON化してViewの関数で処理×データ分かな
+            ViewInstanse.inputres(str);
+
+
         }
 
         /// <summary>
@@ -640,6 +680,19 @@ namespace Majireskun
         {
             if (e.KeyChar == (char)Keys.Enter)
                 e.Handled = true;
+        }
+
+        //リロード用
+        public void Reload()
+        {
+            //リロード間隔制御
+            //dat読み込み関数呼び出し
+            //結果反映
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.ViewInstanse.InvokeTestMethod("aaa","iii");
         }
 
     }

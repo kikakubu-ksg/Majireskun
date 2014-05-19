@@ -1,4 +1,5 @@
 obj/
 bin/
 *.suo
-
+[Dd]ebug*/
+[Rr]elease*/
