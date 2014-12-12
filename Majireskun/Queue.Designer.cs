@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.queueContainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.noDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,6 +38,7 @@
             this.Resmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Res = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErrStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RtimeStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FingerPrint = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -48,6 +50,8 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.noDataGridViewTextBoxColumn,
@@ -56,13 +60,13 @@
             this.Resmail,
             this.Res,
             this.StatusStr,
+            this.ErrStr,
             this.RtimeStr,
             this.FingerPrint});
             this.dataGridView1.DataSource = this.queueContainerBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 21;
             this.dataGridView1.Size = new System.Drawing.Size(762, 329);
@@ -79,37 +83,40 @@
             this.noDataGridViewTextBoxColumn.Name = "noDataGridViewTextBoxColumn";
             this.noDataGridViewTextBoxColumn.ReadOnly = true;
             this.noDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.noDataGridViewTextBoxColumn.Width = 30;
+            this.noDataGridViewTextBoxColumn.Width = 25;
             // 
             // CheckBox
             // 
             this.CheckBox.HeaderText = "CheckBox";
             this.CheckBox.Name = "CheckBox";
             this.CheckBox.ReadOnly = true;
+            this.CheckBox.Width = 63;
             // 
             // Resname
             // 
             this.Resname.DataPropertyName = "Resname";
             this.Resname.HeaderText = "名前";
             this.Resname.Name = "Resname";
-            this.Resname.ReadOnly = true;
             this.Resname.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Resname.Width = 35;
             // 
             // Resmail
             // 
             this.Resmail.DataPropertyName = "Resmail";
             this.Resmail.HeaderText = "メアド";
             this.Resmail.Name = "Resmail";
-            this.Resmail.ReadOnly = true;
             this.Resmail.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Resmail.Width = 37;
             // 
             // Res
             // 
             this.Res.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Res.DataPropertyName = "Res";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Res.DefaultCellStyle = dataGridViewCellStyle1;
             this.Res.HeaderText = "書き込み内容";
+            this.Res.MinimumWidth = 488;
             this.Res.Name = "Res";
-            this.Res.ReadOnly = true;
             this.Res.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // StatusStr
@@ -119,6 +126,16 @@
             this.StatusStr.Name = "StatusStr";
             this.StatusStr.ReadOnly = true;
             this.StatusStr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.StatusStr.Width = 56;
+            // 
+            // ErrStr
+            // 
+            this.ErrStr.DataPropertyName = "ErrStr";
+            this.ErrStr.HeaderText = "エラー";
+            this.ErrStr.Name = "ErrStr";
+            this.ErrStr.ReadOnly = true;
+            this.ErrStr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ErrStr.Width = 38;
             // 
             // RtimeStr
             // 
@@ -127,6 +144,7 @@
             this.RtimeStr.Name = "RtimeStr";
             this.RtimeStr.ReadOnly = true;
             this.RtimeStr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.RtimeStr.Width = 59;
             // 
             // FingerPrint
             // 
@@ -135,6 +153,7 @@
             this.FingerPrint.Name = "FingerPrint";
             this.FingerPrint.ReadOnly = true;
             this.FingerPrint.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FingerPrint.Width = 34;
             // 
             // Queue
             // 
@@ -161,6 +180,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Resmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn Res;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusStr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ErrStr;
         private System.Windows.Forms.DataGridViewTextBoxColumn RtimeStr;
         private System.Windows.Forms.DataGridViewTextBoxColumn FingerPrint;
     }

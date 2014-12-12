@@ -35,6 +35,16 @@ namespace Majireskun
             QUEUE_STATUS_SUCCEED = 0x3,
             QUEUE_STATUS_ERROR = 0x4
         }
+        public enum ErrorStatus
+        {
+            ERROR_STATUS_NULL = 0x0,
+            ERROR_STATUS_SAMBA = 0x1,
+            ERROR_STATUS_BYESARU = 0x2,
+            ERROR_STATUS_RENTOU = 0x3,
+            ERROR_STATUS_SAKURA = 0x4,
+            ERROR_STATUS_UNKNOWN = 0xFF
+        }
+
     }
 
     [DataContract]

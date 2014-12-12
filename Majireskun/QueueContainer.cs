@@ -18,6 +18,7 @@ namespace Majireskun
         private string _fingerprint; //MD5フィンガープリント 送信時に設定
         //private string _status_str; //ステータス文字列
         //private string _rtime_str; //登録時刻文字列
+        private Const.ErrorStatus _err;
 
         private static int number = 0; //通番
 
@@ -38,6 +39,7 @@ namespace Majireskun
             _status = Const.QueueStatus.QUEUE_STATUS_WAIT;
             _rtime = DateTime.Now;
             _fingerprint = null;
+            _err = Const.ErrorStatus.ERROR_STATUS_NULL;
         }
         public int No
         {
@@ -141,6 +143,29 @@ namespace Majireskun
             get
             {
                 return _rtime.ToString();
+            }
+        }
+        public string ErrStr
+        {
+            get
+            {
+                switch (_err)
+                {
+                    case Const.ErrorStatus.ERROR_STATUS_NULL:
+                        return "なし";
+                    case Const.ErrorStatus.ERROR_STATUS_SAMBA:
+                        return "SAMBA規制";
+                    case Const.ErrorStatus.ERROR_STATUS_BYESARU:
+                        return "ばいさる";
+                    case Const.ErrorStatus.ERROR_STATUS_RENTOU:
+                        return "連投規制";
+                    case Const.ErrorStatus.ERROR_STATUS_SAKURA:
+                        return "さくら";
+                    case Const.ErrorStatus.ERROR_STATUS_UNKNOWN:
+                        return "不明";
+                    default:
+                        return "";
+                }
             }
         }
     }

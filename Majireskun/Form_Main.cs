@@ -114,7 +114,7 @@ namespace Majireskun
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-            // 本スレ
+            // 本スレ TODO:秒数を設定値に
             if (this.httptimersec % 15 == 0 && !boolThreadDup && this.ViewInstanse.isAutoReload())
             {
                 // データ取得処理
